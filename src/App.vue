@@ -1,26 +1,54 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="wrapper">
+    <the-header @show="showSideBar"></the-header>
+    <div class="list__category">
+      <list-category></list-category>
+    </div>
+    <div class="sidebar__block">
+      <side-bar class="sidebar" v-if="showBar" @close="closeSideBar"></side-bar>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import SideBar from "./components/layouts/SideBar.vue";
+import ListCategory from "./components/layouts/ListCategory.vue";
+import TheHeader from "./components/layouts/TheHeader.vue";
 export default {
-  name: "App",
+  data() {
+    return {
+      showBar: false,
+    };
+  },
   components: {
-    HelloWorld,
+    TheHeader,
+    ListCategory,
+    SideBar,
+  },
+  methods: {
+    showSideBar() {
+      this.showBar = true;
+    },
+    closeSideBar() {
+      this.showBar = false;
+    },
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@font-face {
+  font-family: "Gilroy";
+  src: url("@/assets/fonts/Gilroy-Regular.ttf") format("ttf");
+}
+
+.wrapper {
+  position: relative;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  height: 95%;
 }
 </style>
